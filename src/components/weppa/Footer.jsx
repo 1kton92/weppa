@@ -1,12 +1,10 @@
-import { Zap, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Zap, Mail, Phone, MapPin } from "lucide-react";
 
 const footerLinks = {
   empresa: [
-    { label: "Sobre Nosotros", href: "#nosotros" },
-    { label: "Servicios", href: "#servicios" },
-    { label: "Casos de Éxito", href: "#casos" },
-    { label: "Proceso", href: "#proceso" },
-    { label: "Tecnologías", href: "#tecnologias" },
+    { label: "¿Quiénes somos?", href: "#nosotros" },
+    { label: "¿Qué ofrecemos?", href: "#servicios" },
+    { label: "¿Cómo trabajamos?", href: "#proceso" },
   ],
 };
 
@@ -36,30 +34,10 @@ export default function Footer() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-8">
-        {/* Top CTA Banner */}
-        <div
-          className="rounded-3xl p-8 lg:p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-6"
-          style={{ background: "linear-gradient(135deg, #0066FF15, #00BFA515)", border: "1px solid #0066FF25" }}
-        >
-          <div>
-            <h3 className="text-white font-heading font-bold text-2xl lg:text-3xl mb-2" style={{ fontWeight: 700 }}>
-              ¿Listo para dar el siguiente paso?
-            </h3>
-            <p className="text-white/50">Primera consulta gratuita, sin compromiso.</p>
-          </div>
-          <button
-            onClick={() => handleNav("#contacto")}
-            className="shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#0066FF] text-white font-semibold hover:bg-[#0052CC] transition-all duration-200 hover:scale-105 whitespace-nowrap shadow-lg shadow-blue-500/20"
-          >
-            Hablar con nosotros
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
-          <div className="col-span-2 lg:col-span-1">
+          <div className="hidden lg:block">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0066FF] to-[#00BFA5] flex items-center justify-center">
                 <Zap className="w-4 h-4 text-white" />
@@ -74,7 +52,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="order-2 lg:order-none">
+          <div className="hidden lg:block">
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">Empresa</h4>
             <ul className="space-y-3">
               {footerLinks.empresa.map((link) => (
@@ -91,17 +69,28 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="order-1 lg:order-none">
+          <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">Contacto</h4>
             <ul className="space-y-3">
               {[
                 { icon: Mail, value: "contacto@weppa.com.ar" },
-                { icon: Phone, value: "+54 9 341 511-5053" },
+                { icon: Phone, value: "+54 9 341 511-5053", href: "https://wa.me/5493415115053" },
                 { icon: MapPin, value: "Rosario, Argentina" },
-              ].map(({ icon: Icon, value }) => (
+              ].map(({ icon: Icon, value, href }) => (
                 <li key={value} className="flex items-start gap-2.5">
                   <Icon className="w-4 h-4 text-[#0066FF] shrink-0 mt-0.5" />
-                  <span className="text-white/40 text-sm">{value}</span>
+                  {href ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/40 text-sm whitespace-nowrap hover:text-white transition-colors"
+                    >
+                      {value}
+                    </a>
+                  ) : (
+                    <span className="text-white/40 text-sm whitespace-nowrap">{value}</span>
+                  )}
                 </li>
               ))}
             </ul>

@@ -10,8 +10,7 @@ import { base44 } from "@/api/base44Client";
 const schema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
   email: z.string().email("Ingresa un email válido"),
-  company: z.string().min(1, "El nombre de tu empresa es requerido"),
-  phone: z.string().min(6, "Ingresa un teléfono válido"),
+  phone: z.string().min(6, "Ingresa un teléfono válido").optional().or(z.literal("")),
   message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
 });
 
@@ -44,11 +43,10 @@ export default function ContactForm() {
     try {
       await base44.integrations.Core.SendEmail({
         to: "contacto@weppa.com",
-        subject: `Nueva consulta de ${data.name} — ${data.company}`,
+        subject: `Nueva consulta de ${data.name}`,
         body: `
 Nombre: ${data.name}
 Email: ${data.email}
-Empresa: ${data.company}
 Teléfono: ${data.phone}
 
 Mensaje:
@@ -93,7 +91,7 @@ ${data.message}
           {/* Left: Info */}
           <SectionReveal className="lg:col-span-2" direction="right">
             <div className="space-y-8">
-              <div>
+              <div className="hidden lg:block">
                 <h3
                   className="text-2xl font-heading font-bold text-[#1E293B] mb-3"
                   style={{ fontWeight: 700 }}
@@ -110,10 +108,16 @@ ${data.message}
               <div className="space-y-4">
                 {[
                   { icon: Mail, label: "Email", value: "contacto@weppa.com.ar", color: "#0066FF" },
-                  { icon: Phone, label: "Teléfono", value: "+54 9 341 511-5053", color: "#00BFA5" },
-                  { icon: MapPin, label: "Ubicación", value: "Rosario, Argentina", color: "#D97706" },
-                ].map(({ icon: Icon, label, value, color }) => (
-                  <div key={label} className="flex items-center gap-4">
+                  {
+                    icon: Phone,
+                    label: "Teléfono",
+                    value: "+54 9 341 511-5053",
+                    color: "#00BFA5",
+                    href: "https://wa.me/5493415115053",
+                  },
+                  { icon: MapPin, label: "Ubicación", value: "Rosario, Argentina", color: "#D97706", hideOnMobile: true },
+                ].map(({ icon: Icon, label, value, color, href, hideOnMobile }) => (
+                  <div key={label} className={`items-center gap-4 ${hideOnMobile ? "hidden lg:flex" : "flex"}`}>
                     <div
                       className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                       style={{ background: `${color}15` }}
@@ -122,7 +126,18 @@ ${data.message}
                     </div>
                     <div>
                       <div className="text-xs text-[#1E293B]/40 uppercase tracking-wide">{label}</div>
-                      <div className="text-[#1E293B] font-medium text-sm">{value}</div>
+                      {href ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#1E293B] font-medium text-sm hover:text-[#00BFA5] transition-colors"
+                        >
+                          {value}
+                        </a>
+                      ) : (
+                        <div className="text-[#1E293B] font-medium text-sm">{value}</div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -159,7 +174,7 @@ ${data.message}
                     {/* Name */}
                     <div>
                       <label className="block text-sm font-medium text-[#1E293B] mb-1.5">
-                        Nombre completo *
+                        Nombre*
                       </label>
                       <input
                         {...fieldProps("name", "Juan García")}
@@ -192,40 +207,21 @@ ${data.message}
                     </div>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    {/* Company */}
-                    <div>
-                      <label className="block text-sm font-medium text-[#1E293B] mb-1.5">
-                        Empresa *
-                      </label>
-                      <input
-                        {...fieldProps("company", "Mi Empresa SA")}
-                        className={inputClass("company")}
-                      />
-                      {errors.company && (
-                        <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" />
-                          {errors.company.message}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-sm font-medium text-[#1E293B] mb-1.5">
-                        Teléfono *
-                      </label>
-                      <input
-                        {...fieldProps("phone", "+54 9 11 1234-5678")}
-                        className={inputClass("phone")}
-                      />
-                      {errors.phone && (
-                        <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" />
-                          {errors.phone.message}
-                        </p>
-                      )}
-                    </div>
+                  {/* Phone */}
+                  <div>
+                    <label className="block text-sm font-medium text-[#1E293B] mb-1.5">
+                      Teléfono
+                    </label>
+                    <input
+                      {...fieldProps("phone", "+54 9 11 1234-5678")}
+                      className={inputClass("phone")}
+                    />
+                    {errors.phone && (
+                      <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        {errors.phone.message}
+                      </p>
+                    )}
                   </div>
 
                   {/* Message */}
