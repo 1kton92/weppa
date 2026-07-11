@@ -47,12 +47,12 @@ export default function Navbar() {
             bug class as the earlier backdrop-filter glitch), so the entrance slide/fade
             was removed entirely rather than patched. */}
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className={`flex items-center gap-2 group transition-transform duration-300 md:translate-y-0 ${
-                scrolled ? "translate-y-0" : "translate-y-2"
+                scrolled ? "translate-y-2" : "translate-y-0"
               }`}
             >
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0066FF] to-[#00BFA5] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
@@ -99,9 +99,9 @@ export default function Navbar() {
                 onClick={() => setMobileOpen((prev) => !prev)}
               >
                 {mobileOpen ? (
-                  <X className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-0" : "translate-y-2"}`} />
+                  <X className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-2" : "translate-y-0"}`} />
                 ) : (
-                  <Menu className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-0" : "translate-y-2"}`} />
+                  <Menu className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-2" : "translate-y-0"}`} />
                 )}
               </button>
             </div>
@@ -117,7 +117,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-40 nav-blur border-b border-border/40 shadow-xl"
+            className="fixed inset-x-0 top-20 z-40 nav-blur border-b border-border/40 shadow-xl"
           >
             <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
