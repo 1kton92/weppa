@@ -51,9 +51,7 @@ export default function Navbar() {
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className={`flex items-center gap-2 group transition-transform duration-300 md:translate-y-0 ${
-                scrolled ? "translate-y-2" : "translate-y-0"
-              }`}
+              className="flex items-center gap-2 group"
             >
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0066FF] to-[#00BFA5] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
                 <Zap className="w-4 h-4 text-white" />
@@ -99,9 +97,9 @@ export default function Navbar() {
                 onClick={() => setMobileOpen((prev) => !prev)}
               >
                 {mobileOpen ? (
-                  <X className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-2" : "translate-y-0"}`} />
+                  <X className="w-7 h-7" />
                 ) : (
-                  <Menu className={`w-7 h-7 transition-transform duration-300 ${scrolled ? "translate-y-2" : "translate-y-0"}`} />
+                  <Menu className="w-7 h-7" />
                 )}
               </button>
             </div>
