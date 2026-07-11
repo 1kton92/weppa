@@ -92,6 +92,7 @@
     @apply bg-background text-foreground font-body;
     font-size: 18px;
     line-height: 1.7;
+    overscroll-behavior-y: none;
   }
 
   h1, h2, h3, h4, h5, h6 {

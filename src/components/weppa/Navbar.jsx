@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-[border-color,box-shadow] duration-500 [transform:translateZ(0)] will-change-transform ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[border-color,box-shadow] duration-500 ${
           scrolled ? "shadow-sm border-b border-border/40" : "border-b border-transparent"
         }`}
       >
@@ -47,7 +47,7 @@ export default function Navbar() {
             bug class as the earlier backdrop-filter glitch), so the entrance slide/fade
             was removed entirely rather than patched. */}
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -117,7 +117,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-20 z-40 nav-blur border-b border-border/40 shadow-xl"
+            className="fixed inset-x-0 top-16 z-40 nav-blur border-b border-border/40 shadow-xl"
           >
             <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
