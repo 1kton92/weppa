@@ -12,13 +12,31 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 40);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // The browser can restore/settle the scroll position (history restoration,
+    // late-appearing hash targets, images/fonts still loading) well after this
+    // effect already ran once, without necessarily firing a "scroll" event for
+    // it. Re-check any time the document's height changes instead of guessing
+    // a fixed delay.
+    const resizeObserver = new ResizeObserver(onScroll);
+    resizeObserver.observe(document.documentElement);
+
+    // Last-resort settle checks: some restorations adjust scroll without firing
+    // a scroll event once heights have already settled.
+    const timers = [100, 500, 1000].map((ms) => setTimeout(onScroll, ms));
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      resizeObserver.disconnect();
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   const handleNav = (href) => {
@@ -30,7 +48,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 [transform:translateZ(0)] will-change-transform ${
+        className={`fixed top-0 left-0 right-0 z-50 ${
           scrolled ? "bg-white shadow-sm border-b border-border/40" : "bg-transparent border-b border-transparent"
         }`}
       >
