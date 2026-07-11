@@ -13,7 +13,7 @@ import FloatingCTA from "@/components/weppa/FloatingCTA";
 
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-white">
+    <div className="min-h-svh bg-white">
       <Navbar />
       <main>
         <Hero />

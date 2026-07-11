@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-dvh flex flex-col items-center justify-center overflow-hidden weppa-gradient-hero"
+      className="relative w-full min-h-svh flex flex-col items-center justify-center overflow-hidden weppa-gradient-hero"
       id="inicio"
     >
       {/* Aurora Blobs */}

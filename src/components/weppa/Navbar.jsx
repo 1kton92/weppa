@@ -30,17 +30,10 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-[border-color,box-shadow] duration-500 ${
-          scrolled ? "shadow-sm border-b border-border/40" : "border-b border-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 [transform:translateZ(0)] will-change-transform ${
+          scrolled ? "bg-white shadow-sm border-b border-border/40" : "bg-transparent border-b border-transparent"
         }`}
       >
-        {/* Blur layer: always mounted, only opacity toggles so the compositor never has to
-            create/destroy the backdrop-filter layer mid-scroll (avoids mobile repaint glitch) */}
-        <div
-          className={`absolute inset-0 nav-blur transition-opacity duration-500 ${
-            scrolled ? "opacity-100" : "opacity-0"
-          }`}
-        />
 
         {/* Plain div, no Framer Motion: any transform Framer Motion leaves inline after
             animating desyncs the mobile touch hit-region from the visible button (same
@@ -91,7 +84,7 @@ export default function Navbar() {
               </button>
               <button
                 type="button"
-                className={`md:hidden pt-8 pr-8 pb-4 pl-4 -mt-6 -mr-6 -mb-2 -ml-2 rounded-lg transition-colors [touch-action:manipulation] ${
+                className={`md:hidden p-2 rounded-lg transition-colors [touch-action:manipulation] ${
                   scrolled ? "text-[#1E293B]" : "text-white"
                 }`}
                 onClick={() => setMobileOpen((prev) => !prev)}
