@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-[border-color,box-shadow] duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[border-color,box-shadow] duration-500 [transform:translateZ(0)] will-change-transform ${
           scrolled ? "shadow-sm border-b border-border/40" : "border-b border-transparent"
         }`}
       >
