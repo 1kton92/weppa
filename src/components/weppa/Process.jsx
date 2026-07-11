@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { MessageSquare, Palette, Code2, Rocket, ChevronDown } from "lucide-react";
 import SectionReveal from "./SectionReveal";
@@ -41,7 +41,69 @@ const steps = [
 export default function Process() {
   const lineRef = useRef(null);
   const inView = useInView(lineRef, { once: true, margin: "-100px" });
-  const [openStep, setOpenStep] = useState(0);
+  const [openStep, setOpenStep] = useState(-1);
+
+  const mobileContainerRef = useRef(null);
+  const lastIconRef = useRef(null);
+  const [mobileLineHeight, setMobileLineHeight] = useState(0);
+
+  const gridRef = useRef(null);
+  const firstIconCircleRef = useRef(null);
+  const lastIconCircleRef = useRef(null);
+  const [desktopLine, setDesktopLine] = useState({ left: 0, width: 0, top: 0 });
+
+  useEffect(() => {
+    const update = () => {
+      if (!mobileContainerRef.current || !lastIconRef.current) return;
+      const containerTop = mobileContainerRef.current.getBoundingClientRect().top;
+      const iconRect = lastIconRef.current.getBoundingClientRect();
+      setMobileLineHeight(iconRect.top - containerTop + iconRect.height / 2);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    if (mobileContainerRef.current) ro.observe(mobileContainerRef.current);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, [openStep]);
+
+  useEffect(() => {
+    // Icon cards animate in with a translateY transform, which shifts
+    // getBoundingClientRect() but not offsetTop/offsetLeft. Using offsets
+    // gives the icons' final resting position regardless of that animation.
+    const offsetFrom = (el, ancestor) => {
+      let top = 0;
+      let left = 0;
+      let node = el;
+      while (node && node !== ancestor) {
+        top += node.offsetTop;
+        left += node.offsetLeft;
+        node = node.offsetParent;
+      }
+      return { top, left };
+    };
+    const update = () => {
+      if (!gridRef.current || !firstIconCircleRef.current || !lastIconCircleRef.current) return;
+      const first = firstIconCircleRef.current;
+      const last = lastIconCircleRef.current;
+      const firstOffset = offsetFrom(first, gridRef.current);
+      const lastOffset = offsetFrom(last, gridRef.current);
+      const left = firstOffset.left + first.offsetWidth / 2;
+      const right = lastOffset.left + last.offsetWidth / 2;
+      const top = firstOffset.top + first.offsetHeight / 2;
+      setDesktopLine({ left, width: right - left, top });
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    if (gridRef.current) ro.observe(gridRef.current);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <section id="proceso" className="bg-white pt-0 pb-16 lg:pb-20 overflow-hidden">
@@ -64,25 +126,28 @@ export default function Process() {
 
         {/* Desktop: Horizontal Timeline */}
         <div className="hidden lg:block" ref={lineRef}>
-          {/* Connecting Line */}
-          <div className="relative mb-12">
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-border/60 -translate-y-1/2" />
+          <div className="relative grid grid-cols-4 gap-8" ref={gridRef}>
+            {/* Connecting Line - passes through the center of each icon */}
+            <div
+              className="absolute h-px bg-border/60 -translate-y-1/2"
+              style={{ left: desktopLine.left, width: desktopLine.width, top: desktopLine.top }}
+            />
             <motion.div
-              className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-[#0066FF] to-[#00BFA5] -translate-y-1/2"
-              initial={{ width: "0%" }}
-              animate={inView ? { width: "100%" } : { width: "0%" }}
+              className="absolute h-px bg-gradient-to-r from-[#0066FF] to-[#00BFA5] -translate-y-1/2"
+              style={{ left: desktopLine.left, top: desktopLine.top }}
+              initial={{ width: 0 }}
+              animate={inView ? { width: desktopLine.width } : { width: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
             />
             {/* Traveling dot */}
             <motion.div
-              className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#0066FF] shadow-lg shadow-blue-500/50"
-              initial={{ left: "0%" }}
-              animate={inView ? { left: "100%" } : { left: "0%" }}
+              className="absolute -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#0066FF] shadow-lg shadow-blue-500/50"
+              style={{ top: desktopLine.top }}
+              initial={{ left: desktopLine.left }}
+              animate={inView ? { left: desktopLine.left + desktopLine.width } : { left: desktopLine.left }}
               transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
             />
-          </div>
 
-          <div className="grid grid-cols-4 gap-8">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
@@ -96,20 +161,23 @@ export default function Process() {
                   {/* Icon Circle */}
                   <div className="relative flex items-center justify-center mx-auto mb-6">
                     <div
-                      className="w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                      ref={i === 0 ? firstIconCircleRef : i === steps.length - 1 ? lastIconCircleRef : undefined}
+                      className="relative w-16 h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg"
                       style={{
                         background: `linear-gradient(135deg, ${step.color}20, ${step.color}10)`,
+                        backgroundColor: "#fff",
+                        backgroundBlendMode: "normal",
                         border: `1px solid ${step.color}30`,
                       }}
                     >
-                      <Icon className="w-7 h-7" style={{ color: step.color }} />
+                      <span
+                        className="absolute top-1 left-1/2 -translate-x-1/2 text-[10px] leading-none font-bold font-heading"
+                        style={{ color: step.color }}
+                      >
+                        {step.number}
+                      </span>
+                      <Icon className="w-6 h-6 mt-1.5" style={{ color: step.color }} />
                     </div>
-                    <span
-                      className="absolute -top-2 -right-2 text-xs font-bold font-heading"
-                      style={{ color: step.color }}
-                    >
-                      {step.number}
-                    </span>
                   </div>
 
                   <h3
@@ -126,10 +194,10 @@ export default function Process() {
         </div>
 
         {/* Mobile: Vertical Timeline */}
-        <div className="lg:hidden relative">
+        <div className="lg:hidden relative" ref={mobileContainerRef}>
           <div
-            className="absolute left-6 top-0 bottom-0 w-px"
-            style={{ background: "linear-gradient(180deg, #0066FF, #00BFA5)" }}
+            className="absolute left-6 top-0 w-px"
+            style={{ height: mobileLineHeight, background: "linear-gradient(180deg, #0066FF, #00BFA5)" }}
           />
           <div className="space-y-10">
             {steps.map((step, i) => {
@@ -140,6 +208,7 @@ export default function Process() {
                   <div className="flex gap-6 pl-14 relative">
                     {/* Icon on line */}
                     <div
+                      ref={i === steps.length - 1 ? lastIconRef : undefined}
                       className="absolute left-0 z-10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                       style={{
                         background: `linear-gradient(135deg, ${step.color}20, ${step.color}10)`,

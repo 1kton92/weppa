@@ -59,12 +59,12 @@ export default function Navbar() {
                 <Zap className="w-4 h-4 text-white" />
               </div>
               <span
-                className={`text-xl font-heading font-800 tracking-tight transition-colors duration-300 ${
+                className={`text-xl font-800 tracking-tight transition-colors duration-300 ${
                   scrolled ? "text-[#1E293B]" : "text-white"
                 }`}
-                style={{ fontWeight: 800 }}
+                style={{ fontWeight: 700, fontFamily: "'Comfortaa', sans-serif" }}
               >
-                Weppa
+                weppa
               </span>
             </button>
 
