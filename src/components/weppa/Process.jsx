@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { MessageSquare, Palette, Code2, Rocket } from "lucide-react";
+import { MessageSquare, Palette, Code2, Rocket, ChevronDown } from "lucide-react";
 import SectionReveal from "./SectionReveal";
 
 const steps = [
@@ -41,6 +41,7 @@ const steps = [
 export default function Process() {
   const lineRef = useRef(null);
   const inView = useInView(lineRef, { once: true, margin: "-100px" });
+  const [openStep, setOpenStep] = useState(0);
 
   return (
     <section id="proceso" className="bg-white pt-0 pb-16 lg:pb-20 overflow-hidden">
@@ -133,29 +134,53 @@ export default function Process() {
           <div className="space-y-10">
             {steps.map((step, i) => {
               const Icon = step.icon;
+              const isOpen = openStep === i;
               return (
                 <SectionReveal key={step.title} delay={0.1 * i} direction="left">
                   <div className="flex gap-6 pl-14 relative">
                     {/* Icon on line */}
                     <div
-                      className="absolute left-0 w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                      className="absolute left-0 z-10 w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                       style={{
                         background: `linear-gradient(135deg, ${step.color}20, ${step.color}10)`,
+                        backgroundColor: "#fff",
+                        backgroundBlendMode: "normal",
                         border: `1px solid ${step.color}30`,
                       }}
                     >
                       <Icon className="w-5 h-5" style={{ color: step.color }} />
                     </div>
 
-                    <div>
+                    <button
+                      type="button"
+                      onClick={() => setOpenStep(isOpen ? -1 : i)}
+                      aria-expanded={isOpen}
+                      className="flex-1 text-left"
+                    >
                       <span className="text-xs font-bold" style={{ color: step.color }}>
                         {step.number}
                       </span>
-                      <h3 className="text-lg font-heading font-bold text-[#1E293B] mb-2" style={{ fontWeight: 700 }}>
-                        {step.title}
-                      </h3>
-                      <p className="text-[#1E293B]/55 text-base leading-relaxed">{step.description}</p>
-                    </div>
+                      <div className="flex items-center justify-between gap-4">
+                        <h3
+                          className="text-lg font-heading font-bold text-[#1E293B] mb-2"
+                          style={{ fontWeight: 700 }}
+                        >
+                          {step.title}
+                        </h3>
+                        <ChevronDown
+                          className="w-5 h-5 shrink-0 text-[#1E293B]/40 transition-transform duration-300"
+                          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                        />
+                      </div>
+                      <div
+                        className="overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out"
+                        style={{ maxHeight: isOpen ? "200px" : "0px", opacity: isOpen ? 1 : 0 }}
+                      >
+                        <p className="text-[#1E293B]/55 text-base leading-relaxed pb-1">
+                          {step.description}
+                        </p>
+                      </div>
+                    </button>
                   </div>
                 </SectionReveal>
               );
