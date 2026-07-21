@@ -227,7 +227,7 @@ export default function ContactForm() {
                   {/* Message */}
                   <div>
                     <label className="block text-sm font-medium text-[#1E293B] mb-1.5">
-                      Cuéntanos tu proyecto *
+                      Contanos tu proyecto *
                     </label>
                     <textarea
                       {...fieldProps("message", "Necesito una tienda online para vender ropa, con carrito de compras y pagos con tarjeta...")}
