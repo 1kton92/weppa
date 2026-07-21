@@ -100,13 +100,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.05 }}
-          className="mb-4"
+          className="mb-16"
         >
           <span
-            className="weppa-text-gradient font-heading"
-            style={{ fontSize: "clamp(5rem, 16vw, 14rem)", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.04em" }}
+            className="weppa-text-gradient"
+            style={{ fontFamily: "'Comfortaa', sans-serif", fontSize: "clamp(5rem, 16vw, 14rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.04em" }}
           >
-            Weppa
+            weppa
           </span>
         </motion.div>
 
@@ -115,14 +115,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-heading text-white leading-[1.05] tracking-tight mb-6"
+          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading text-white leading-[1.05] tracking-tight mb-6"
           style={{ fontWeight: 800 }}
         >
-          Tu Tienda Online y
-          <br />
-          <span className="weppa-text-gradient">Gestión,</span>
-          <br />
-          Simplificados
+          <span className="block">Aplicaciones digitales</span>
+          <span className="weppa-text-gradient block mt-4">para simplificar</span>
+          <span className="block">tu negocio</span>
         </motion.h1>
 
         {/* Subheadline */}
