@@ -7,7 +7,7 @@ const steps = [
   {
     icon: MessageSquare,
     number: "01",
-    title: "Consultoría",
+    title: "Descubrimiento",
     description:
       "Entendemos tu negocio, tus objetivos y los procesos que necesitas mejorar. Definimos juntos el alcance y la solución ideal.",
     color: "#0066FF",
@@ -17,7 +17,7 @@ const steps = [
     number: "02",
     title: "Diseño",
     description:
-      "Creamos prototipos y wireframes para que puedas ver y aprobar el producto antes de escribir la primera línea de código.",
+      "Creamos un prototipo para bajar las ideas a algo concreto que puedas ver y testear antes de arrancar.",
     color: "#00BFA5",
   },
   {
@@ -25,7 +25,7 @@ const steps = [
     number: "03",
     title: "Desarrollo",
     description:
-      "Nuestro equipo construye tu solución con las mejores tecnologías. Recibes actualizaciones semanales del progreso.",
+      "Construimos tu solución, te mostramos los avances e incorporamos el feedback en cada iteración.",
     color: "#0066FF",
   },
   {
@@ -33,7 +33,7 @@ const steps = [
     number: "04",
     title: "Lanzamiento & Soporte",
     description:
-      "Desplegamos tu solución, capacitamos a tu equipo y te acompañamos con soporte continuo para que todo funcione perfecto.",
+      "Tu solución está lista! Entregamos la herramienta funcionando con un entrenamiento para que puedan usarla desde el primer momento y los acompañamos con soporte continuo para que todo siga fluyendo y creciendo como necesitan.",
     color: "#00BFA5",
   },
 ];

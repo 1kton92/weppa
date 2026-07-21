@@ -83,7 +83,7 @@ export default function ContactForm() {
             <span className="weppa-text-gradient"> tu negocio?</span>
           </h2>
           <p className="text-[#1E293B]/55 text-lg mt-4 max-w-lg mx-auto">
-            Cuéntanos tu idea, nos encantaría ayudarte a hacerla realidad
+            Contanos tu idea, nosotros la hacemos realidad
           </p>
         </SectionReveal>
 
@@ -96,7 +96,7 @@ export default function ContactForm() {
                   className="text-2xl font-heading font-bold text-[#1E293B] mb-3"
                   style={{ fontWeight: 700 }}
                 >
-                  Hablemos de tu proyecto
+                  Hablemos
                 </h3>
                 <p className="text-[#1E293B]/55 leading-relaxed">
                   Ya sea que estés comenzando desde cero o necesites mejorar tu sistema actual, estamos aquí para
