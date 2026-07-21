@@ -33,7 +33,7 @@ const steps = [
     number: "04",
     title: "Lanzamiento & Soporte",
     description:
-      "Tu solución está lista! Entregamos la herramienta funcionando con un entrenamiento para que puedan usarla desde el primer momento y los acompañamos con soporte continuo para que todo siga fluyendo y creciendo como necesitan.",
+      "Desplegamos tu solución, capacitamos a tu equipo y te acompañamos con soporte continuo para que todo funcione perfecto.",
     color: "#00BFA5",
   },
 ];
@@ -119,8 +119,9 @@ export default function Process() {
             className="text-4xl lg:text-5xl font-heading text-[#1E293B] leading-tight max-w-2xl mx-auto"
             style={{ fontWeight: 700 }}
           >
-            De la idea al producto en
-            <span className="weppa-text-gradient"> 4 pasos claros</span>
+            De la idea al producto
+            <br />
+            <span className="weppa-text-gradient">en 4 pasos</span>
           </h2>
         </SectionReveal>
 

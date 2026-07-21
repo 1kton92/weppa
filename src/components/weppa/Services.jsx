@@ -10,7 +10,7 @@ const services = [
     glowClass: "card-hover-glow",
     title: "Tu tienda online, lista",
     description:
-      "Sistema modular que incluye catálogo de productos, stock en tiempo real, gestión de pedidos, usuarios, clientes, reportes y workflows. Customizable según la industria y los procesos de cada negocio.",
+      "Te ofrecemos un catálogo con todos tus productos y stock actualizado en tiempo real, gestión de pedidos internos y despachos. Esta opción tiene todo lo que necesitas para empezar a vender online y crecer a tu ritmo, sin complicaciones.",
     features: [],
   },
   {
@@ -32,7 +32,7 @@ const services = [
     glowClass: "amber-hover-glow",
     title: "Mantenimiento y soporte",
     description:
-      "Todos nuestros servicios incluyen un servicio de mantenimiento que cubre el hosting, seguridad, monitoreo y asistencia continua para garantizar estabilidad y evolución del sistema.",
+      "Todos nuestros productos incluyen un servicio de mantenimiento que cubre el hosting, seguridad, monitoreo y asistencia continua para garantizar estabilidad y evolución del sistema para acompañarte a vos y tu negocio.",
     features: [],
   },
 ];
