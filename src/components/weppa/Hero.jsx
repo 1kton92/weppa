@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
+import logo from "../../../img/logo.trans.png";
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -102,9 +103,14 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.05 }}
           className="mb-16"
         >
+          <img
+            src={logo}
+            alt="Logo de Weppa"
+            className="mx-auto mb-0 w-64 sm:w-80 lg:w-[26rem] xl:w-[30rem] h-auto translate-x-10"
+          />
           <span
             className="weppa-text-gradient"
-            style={{ fontFamily: "'Comfortaa', sans-serif", fontSize: "clamp(5rem, 16vw, 14rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.04em" }}
+            style={{ fontFamily: "'Comfortaa', sans-serif", fontSize: "clamp(2rem, 5.5vw, 4.5rem)", fontWeight: 700, lineHeight: 1, letterSpacing: "-0.04em" }}
           >
             weppa
           </span>
@@ -115,23 +121,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading text-white leading-[1.05] tracking-tight mb-6"
+          className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-heading text-white leading-[1.05] tracking-tight mb-6"
           style={{ fontWeight: 800 }}
         >
           <span className="block">Aplicaciones digitales</span>
-          <span className="weppa-text-gradient block mt-4">para simplificar</span>
+          <span className="weppa-text-gradient block mt-2">para simplificar</span>
           <span className="block">tu negocio</span>
         </motion.h1>
-
-        {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-white/60 text-lg sm:text-xl lg:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed font-body font-light"
-        >
-          Soluciones de software personalizadas para que tu negocio crezca sin límites
-        </motion.p>
 
         {/* CTAs */}
         <motion.div

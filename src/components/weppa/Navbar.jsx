@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "../../../img/logo.trans.png";
 
 const navLinks = [
   { label: "Bienvenidos", href: "#inicio" },
@@ -64,9 +65,11 @@ export default function Navbar() {
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="flex items-center gap-2 group"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0066FF] to-[#00BFA5] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
+              <img
+                src={logo}
+                alt="Logo de Weppa"
+                className="h-6 w-auto group-hover:scale-110 transition-transform duration-200"
+              />
               <span
                 className={`text-xl font-800 tracking-tight transition-colors duration-300 ${
                   scrolled ? "text-[#1E293B]" : "text-white"

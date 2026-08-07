@@ -33,7 +33,7 @@ const steps = [
     number: "04",
     title: "Lanzamiento & Soporte",
     description:
-      "Desplegamos tu solución, capacitamos a tu equipo y te acompañamos con soporte continuo para que todo funcione perfecto.",
+      "Desplegamos tu solución, capacitamos a tu equipo y te acompañamos con soporte continuo para que todo funcione.",
     color: "#00BFA5",
   },
 ];

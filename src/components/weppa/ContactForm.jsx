@@ -99,7 +99,7 @@ export default function ContactForm() {
                   Hablemos
                 </h3>
                 <p className="text-[#1E293B]/55 leading-relaxed">
-                  Ya sea que estés comenzando desde cero o necesites mejorar tu sistema actual, estamos aquí para
+                  Ya sea que estés comenzando desde cero o necesites mejorar tu sistema actual, estamos acá para
                   ayudarte.
                 </p>
               </div>

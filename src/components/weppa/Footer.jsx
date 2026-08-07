@@ -47,7 +47,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">
-              Soluciones de software personalizadas para que tu negocio crezca sin límites.
+              Soluciones para crecer sin límites.
             </p>
           </div>
 

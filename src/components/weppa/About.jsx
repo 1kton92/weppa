@@ -1,10 +1,10 @@
 import SectionReveal from "./SectionReveal";
-import { Check } from "lucide-react";
+import { Handshake, PiggyBank, Headset } from "lucide-react";
 
 const differentiators = [
-  { text: "Trabajás directo con quien desarrolla tu proyecto", color: "#0066FF" },
-  { text: "Precios pensados para pymes", color: "#00BFA5" },
-  { text: "Soporte real post-entrega", color: "#D97706" },
+  { icon: Handshake, text: "Trabajás directo con quien desarrolla tu proyecto", color: "#0066FF" },
+  { icon: PiggyBank, text: "Precios pensados para pymes", color: "#00BFA5" },
+  { icon: Headset, text: "Soporte real post-entrega", color: "#D97706" },
 ];
 
 export default function About() {
@@ -26,8 +26,11 @@ export default function About() {
                 className="text-4xl lg:text-5xl font-heading text-[#1E293B] leading-tight mb-6"
                 style={{ fontWeight: 700 }}
               >
-                Transformamos ideas en
-                <span className="weppa-text-gradient"> software que funciona</span>
+                Transformamos ideas
+                <br />
+                <span className="sm:whitespace-nowrap">
+                  en <span className="weppa-text-gradient">soluciones funcionales</span>
+                </span>
               </h2>
             </SectionReveal>
 
@@ -60,7 +63,7 @@ export default function About() {
                     className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-200"
                     style={{ background: `${item.color}15` }}
                   >
-                    <Check className="w-6 h-6" style={{ color: item.color }} />
+                    <item.icon className="w-8 h-8" style={{ color: item.color }} />
                   </div>
                   <div className="text-[#1E293B] font-semibold text-lg leading-snug">{item.text}</div>
                 </div>
