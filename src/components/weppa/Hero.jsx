@@ -121,7 +121,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-heading text-white leading-[1.05] tracking-tight mb-6"
+          className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading text-white leading-[1.05] tracking-tight mb-6"
           style={{ fontWeight: 800 }}
         >
           <span className="block">Aplicaciones digitales</span>
